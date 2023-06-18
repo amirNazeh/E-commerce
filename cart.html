@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card</title>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body onload="LoadCartData()">
+    <!-- Navbar Section -->
+    <section id="header">
+      <a href="#"><img  class="logo" alt="" /></a>
+      <div>
+        <ul id="navbar">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li id="lg-bag">
+            <a class="active" href="cart.html"
+              ><i class="fa-solid fa-bag-shopping"></i
+            ></a>
+          </li>
+          <a href="#" id="close"><i class="fa-sharp fa-solid fa-xmark"></i></a>
+        </ul>
+      </div>
+      <div id="mobile">
+        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+        <i id="bar" class="fas fa-outdent"></i>
+      </div>
+    </section>
+
+    <section id="page-header" class="card-header">
+      <h2>#cart</h2>
+      <p>Add your coupon code $ SAVE upto 70%!</p>
+    </section>
+
+    <section id="cart" class="section-p1">
+      <table width="100%">
+        <thead>
+          <tr>
+            <td>Remove</td>
+            <td>Image</td>
+            <td>Product</td>
+            <td>Price</td>
+            <td>Quantity</td>
+          </tr>
+        </thead>
+        <tbody id="cardList">
+        </tbody>
+      </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+      <div id="coupon">
+        <h3>Apply Coupon</h3>
+        <div>
+          <input type="text" placeholder="Enter Your Coupon" />
+          <button class="normal">Apply</button>
+        </div>
+      </div>
+      <div id="subtotal">
+        <h3>Cart Totals</h3>
+        <table id="price" style="margin-bottom: 0;">
+          
+        </table>
+        <table style="border-top:none ;">
+          <tr>
+            <td>Shopping</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td><strong id="total"></strong></td>
+          </tr>
+        </table>
+        <button class="normal">Product to Checkout</button>
+      </div>
+    </section>
+
+    <!-- footer section -->
+    <footer class="section-p1">
+      <div class="col">
+      
+        <h4>Contact</h4>
+        <p><strong>Address:</strong> Egypt , cairo , Giza</p>
+        <p><strong>Phone:</strong> 01056070810</p>
+        <p><strong>Hours:</strong> 09:00 AM to 08:00 pm</p>
+
+        <div class="follow">
+          <h4>Follow us</h4>
+          <div class="icon">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-google"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <h4>About</h4>
+        <a href="#"> About us</a>
+        <a href="#"> Delivery Information</a>
+        <a href="#"> Privacy Policy</a>
+        <a href="#"> Terms & Conditions</a>
+        <a href="#"> Contact Us</a>
+      </div>
+
+      <div class="col">
+        <h4>Account</h4>
+        <a href="#"> Sign In</a>
+        <a href="#"> View Cart</a>
+        <a href="#"> My Wishlist</a>
+        <a href="#"> Track My Order</a>
+        <a href="#"> Help</a>
+      </div>
+
+      <div class="col install">
+        <h4>Install App</h4>
+        <p>From App Store or Google Play</p>
+        <div class="row">
+          <img src="img/pay/app.jpg" alt="" />
+          <img src="img/pay/play.jpg" alt="" />
+        </div>
+        <div>
+          <p>Secured Payment Gateway</p>
+          <img src="img/pay/pay.png" alt="" />
+        </div>
+      </div>
+    </footer>
+
+    <!-- Link for fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/9bf21babf0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+
+    <script>
+      var addTotal =0;
+      function LoadCartData() {
+        //Get the stored data from local storage
+        const storedData = JSON.parse(localStorage.getItem("CartData"));
+        console.log(storedData)
+
+        for (let index = 0; index < storedData.length; index++) {
+
+          console.log(index);
+          console.log(storedData[index]);
+          var cardList = document.getElementsByName("cardList").value;
+
+          var tr = document.createElement("tr");
+          tr.setAttribute("id", "tableRow");
+
+          var td1 = tr.appendChild(document.createElement("td"));
+
+          var a = td1.appendChild(document.createElement("a"));
+          a.href = "#"
+          a.className="aa"
+
+          var i = a.appendChild(document.createElement("i"));
+          i.className ="far fa-times-circle";
+
+          var td2 = tr.appendChild(document.createElement("td"));
+          var img = td2.appendChild(document.createElement("img"));
+          console.log(storedData[index].imageName);
+          img.src = "img/products/" + storedData[index].imageName;
+
+          var td3 = tr.appendChild(document.createElement("td"));
+          td3.innerHTML = storedData[index].productName;
+
+          var td4 = tr.appendChild(document.createElement("td"));
+          td4.innerHTML = storedData[index].productPrice;
+
+          var td5 = tr.appendChild(document.createElement("td"));
+          var input = td5.appendChild(document.createElement("input"));
+          input.setAttribute("value" , storedData[index].productQuantity);
+          input.setAttribute("type" , "number");
+
+          document.getElementById("cardList").appendChild(tr);
+          //document.getElementById("tableRow").appendChild(td);
+           
+          //get price & total
+          var total =storedData[index].productPrice;
+
+          var totalaftersplit = total.split("$");
+          var totalafterparse = Number(totalaftersplit[1]);
+      
+          var xx = addTotal += totalafterparse;
+          console.log(xx);
+          document.getElementById("price").innerHTML +=`<tr><td>Card Subtotal</td> <td>${storedData[index].productPrice}</td></tr>`
+          document.getElementById("total").innerHTML = `$`+addTotal
+
+      // const productID = document.getElementById("productID");
+      // productID.setAttribute("id", storedData.productID);
+      
+         
+    }
+      }
+      function removeProduct(i){
+        console.log(i)
+      }
+    </script>
+  </body>
+</html>
